@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+
+    <persistence-unit name="lunchoicePersistenceUnit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+
+        <class>com.brunozambiazi.lunchoice.backend.model.Person</class>
+        <class>com.brunozambiazi.lunchoice.backend.model.Restaurant</class>
+        <class>com.brunozambiazi.lunchoice.backend.model.Vote</class>
+        
+        <properties>
+<!--             <property name="hibernate.ogm.datastore.provider" value="neo4j_embedded" /> -->
+<!--             <property name="hibernate.ogm.datastore.database" value="lunchoice" /> -->
+<!--             <property name="hibernate.ogm.neo4j.database_path" value="database/lunchoice" /> -->
+		    <property name="hibernate.ogm.datastore.provider" value="mongodb" />
+		    <property name="hibernate.ogm.datastore.database" value="lunchoice" />
+		    <property name="hibernate.ogm.datastore.host" value="ds037283.mongolab.com:37283" />
+		    <property name="hibernate.ogm.datastore.username" value="lunchoice" />
+		    <property name="hibernate.ogm.datastore.password" value="lunch0ice" />
+        </properties>
+    </persistence-unit>
+    
+</persistence>
