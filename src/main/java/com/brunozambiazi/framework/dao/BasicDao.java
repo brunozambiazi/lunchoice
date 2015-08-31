@@ -3,7 +3,7 @@ package com.brunozambiazi.framework.dao;
 
 import com.brunozambiazi.framework.model.BaseEntity;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hibernate.Session;
@@ -24,7 +24,7 @@ public abstract class BasicDao<T extends BaseEntity<ID>, ID extends Serializable
 
 
 	@Override
-	public Collection<T> findAll() {
+	public List<T> findAll() {
 		return getSession().createQuery(String.format("from %s", entityClass.getSimpleName())).list();
 	}
 	

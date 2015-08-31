@@ -1,33 +1,54 @@
 apply plugin: 'eclipse'
 apply plugin: 'jacoco'
-apply plugin: 'java'
+apply plugin: 'org.akhikhl.gretty'
+apply plugin: 'war'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 
-repositories {
-    mavenCentral()
+buildscript {
+    dependencies {
+        classpath "org.akhikhl.gretty:gretty:$grettyVersion"
+    }
+    
+    repositories {
+        mavenCentral()
+    }
 }
-
 
 dependencies {
-    compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.3'
-    compile 'org.hibernate.ogm:hibernate-ogm-bom:4.2.0.Final'
-    compile 'org.hibernate.ogm:hibernate-ogm-mongodb:4.2.0.Final'    
-    compile 'org.projectlombok:lombok:1.16.6'
-    compile 'org.springframework:spring-context:4.2.0.RELEASE'
-    compile 'org.springframework:spring-core:4.2.0.RELEASE'
-    compile 'org.springframework:spring-orm:4.2.0.RELEASE'
+    compile "com.sun.mail:javax.mail:$javaxMail"
+    compile "javax.servlet:jstl:$jstlVersion"
+    compile "log4j:log4j:$log4jVersion"
+    compile "org.apache.commons:commons-lang3:$commonsLangVersion"
+    compile "org.hibernate.ogm:hibernate-ogm-bom:$hibernateOgmVersion"
+    compile "org.hibernate.ogm:hibernate-ogm-mongodb:$hibernateOgmVersion" 
+    compile "org.slf4j:jcl-over-slf4j:$slf4jVersion"
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "org.slf4j:slf4j-log4j12:$slf4jVersion"
+    compile "org.springframework:spring-aspects:$springVersion"
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-context-support:$springVersion"
+    compile "org.springframework:spring-core:$springVersion"
+    compile "org.springframework:spring-orm:$springVersion"
+    compile "org.springframework:spring-webmvc:$springVersion"   
+    compile "org.thymeleaf:thymeleaf-spring4:$thymeleafVersion"
     
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.springframework:spring-test:4.2.0.RELEASE'
+    providedCompile "javax.servlet:javax.servlet-api:$servletVersion"
+    providedCompile "org.projectlombok:lombok:$lombokVersion"
+    
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.assertj:assertj-core:$assertJVersion"
+    testCompile "org.springframework:spring-test:$springVersion"
 }
 
+gretty {
+    servletContainer = 'jetty9'
+}
 
 jacoco {
-    toolVersion = '0.7.1.201405082137'
+    toolVersion = "$jacocoVersion"
     reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
@@ -37,4 +58,8 @@ jacocoTestReport {
         csv.enabled false
         html.destination "${buildDir}/jacocoHtml"
     }
+}
+
+repositories {
+    mavenCentral()
 }

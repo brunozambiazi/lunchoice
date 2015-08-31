@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="refresh" content="10;url=/lunchoice" /> 
+		<title th:text="#{title}"></title>
+	</head>
+	<body>
+	   <h1 th:text="#{error}"></h1>
+	   <em th:text="${exception.message}" style="color: red;"></em>
+	   
+	   <hr />
+	   <p th:text="#{user.will_be_redirected}"></p>
+	</body>
+</html>

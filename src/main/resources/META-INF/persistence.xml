@@ -9,14 +9,18 @@
         <class>com.brunozambiazi.lunchoice.backend.model.Vote</class>
         
         <properties>
-<!--             <property name="hibernate.ogm.datastore.provider" value="neo4j_embedded" /> -->
-<!--             <property name="hibernate.ogm.datastore.database" value="lunchoice" /> -->
-<!--             <property name="hibernate.ogm.neo4j.database_path" value="database/lunchoice" /> -->
+<!--             <property name="hibernate.ogm.datastore.provider" value="mongodb" /> -->
+<!--             <property name="hibernate.ogm.datastore.database" value="lunchoice-test" /> -->
+<!--             <property name="hibernate.ogm.datastore.host" value="localhost:27017" /> -->
+<!--             <property name="hibernate.ogm.datastore.username" value="" /> -->
+<!--             <property name="hibernate.ogm.datastore.password" value="" /> -->
+<!--             <property name="hibernate.ogm.datastore.create_database" value="true" /> -->
 		    <property name="hibernate.ogm.datastore.provider" value="mongodb" />
 		    <property name="hibernate.ogm.datastore.database" value="lunchoice" />
 		    <property name="hibernate.ogm.datastore.host" value="ds037283.mongolab.com:37283" />
 		    <property name="hibernate.ogm.datastore.username" value="lunchoice" />
 		    <property name="hibernate.ogm.datastore.password" value="lunch0ice" />
+		    <property name="hibernate.ogm.mongodb.connection_timeout" value="10000" />
         </properties>
     </persistence-unit>
     

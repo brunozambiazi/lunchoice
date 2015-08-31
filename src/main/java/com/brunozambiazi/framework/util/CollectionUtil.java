@@ -13,12 +13,18 @@ public final class CollectionUtil {
 	}
 	
 	
-	/**
-	 * 
-	 * @param collection
-	 * @param argumentKey
-	 * @return
-	 */
+	public static <T> Collection<T> find(Collection<T> collection, Predicate<T> predicate) {
+		Collection<T> result = new HashSet<T>();
+		
+		for (T element : collection) {
+			if (predicate.evaluate(element)) {
+				result.add(element);
+			}
+		}
+		
+		return result;
+	}
+	
 	public static <T, K> Map<K, Collection<T>> map(Collection<T> collection, ArgumentKey<T, K> argumentKey) {
 		Map<K, Collection<T>> result = new HashMap<>();
 		

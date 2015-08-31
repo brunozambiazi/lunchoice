@@ -1,23 +1,48 @@
 
 package com.brunozambiazi.lunchoice.scheduler;
 
+import com.brunozambiazi.framework.spring.Message;
+import com.brunozambiazi.lunchoice.backend.model.Person;
+import com.brunozambiazi.lunchoice.backend.model.Restaurant;
+import com.brunozambiazi.lunchoice.backend.service.PersonService;
 import com.brunozambiazi.lunchoice.backend.service.RestaurantService;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 
-@Component
 public class TodayChoiceWinnerScheduler {
 
 	@Autowired
+	private PersonService personService;
+	
+	@Autowired
 	private RestaurantService restaurantService;
 	
+	@Autowired
+	private Message message;
+
+	@Autowired
+	private JavaMailSender mail;
 	
-	@Scheduled(cron = "0 35 11 * * MON-FRI")
+	
+	@Scheduled(cron = "${cron.choice.scheduler}")
 	public void run() {
-		restaurantService.makeChoiceToday();
+		Restaurant restaurant = restaurantService.makeChoiceToday();
+		
+		if (restaurant == null) {
+			return;
+		}
+		
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		mailMessage.setSubject(message.get("mail.subject"));
+		mailMessage.setText(message.get("mail.body", restaurant.getName()));
+		
+		for (Person person : personService.findAll()) {
+			mailMessage.setTo(person.getEmail());
+			mail.send(mailMessage);
+		}
 	}
 	
 }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="#{title}"></title>
+	</head>
+	<body>
+	   <form action="#" method="post" th:action="@{/vote}">
+	       <select name="person">
+	           <option th:each="p : ${people}" th:value="${p.id}" th:text="${p.name}"></option>
+	       </select>
+	       
+	       <p th:text="#{today.lunch.question}"></p>
+	       
+	       <ul>
+		       <li th:each="r : ${restaurants}">
+	               <input name="restaurant" type="radio" th:value="${r.id}" />
+	               <label th:text="${r.name}"></label> 
+	               <span th:text="'(' + ${r.votesToday} + ' ' + #{votes} + ')'" style="font-size: 90%; font-style: italic;"></span>
+	           </li>
+           </ul>
+	       
+	       <button type="submit" th:text="#{vote}" />
+	   </form>
+	</body>
+</html>

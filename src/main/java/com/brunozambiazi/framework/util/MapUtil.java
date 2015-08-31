@@ -11,11 +11,6 @@ public final class MapUtil {
 	}
 	
 	
-	/**
-	 * 
-	 * @param map
-	 * @return
-	 */
 	public static <T, K> K getMostRelevantKey(Map<K, Collection<T>> map) {
 		K mostRelevantKey = null;
 		

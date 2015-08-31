@@ -4,7 +4,7 @@ package com.brunozambiazi.framework.service;
 import com.brunozambiazi.framework.dao.BaseDao;
 import com.brunozambiazi.framework.model.BaseEntity;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public abstract class BasicService<T extends BaseEntity<ID>, ID extends Serializable> implements BaseService<T, ID> {
 
 	@Override
-	public Collection<T> findAll() {
+	public List<T> findAll() {
 		return getDao().findAll();
 	}
 	

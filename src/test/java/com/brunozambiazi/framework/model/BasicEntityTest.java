@@ -1,9 +1,10 @@
 
 package com.brunozambiazi.framework.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import lombok.Getter;
 import lombok.Setter;
-import org.junit.Assert;
 import org.junit.Test;
 
 
@@ -13,63 +14,60 @@ public class BasicEntityTest {
 	@Test
 	public void longIdEqualsAndHashCode() {
 		LongEntity entity1 = new LongEntity();
-		Assert.assertNotEquals(entity1, null);
 
 		LongEntity entity2 = new LongEntity();
-		Assert.assertNotEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertNotEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isNotEqualTo(entity2.hashCode());
+		assertThat(entity1).isNotEqualTo(entity2);
 		
 		entity1.setId(1L);
-		Assert.assertNotEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertNotEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isNotEqualTo(entity2.hashCode());
+		assertThat(entity1).isNotEqualTo(entity2);
 		
 		entity2.setId(2L);
-		Assert.assertNotEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertNotEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isNotEqualTo(entity2.hashCode());
+		assertThat(entity1).isNotEqualTo(entity2);
 		
 		entity2.setId(entity1.getId());
-		Assert.assertEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isEqualTo(entity2.hashCode());
+		assertThat(entity1).isEqualTo(entity2);
 		
 		entity1.setId(100L);
 		entity2.setId(100L);
-		Assert.assertEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isEqualTo(entity2.hashCode());
+		assertThat(entity1).isEqualTo(entity2);
 		
 		entity2 = entity1;
-		Assert.assertEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isEqualTo(entity2.hashCode());
+		assertThat(entity1).isEqualTo(entity2);
 	}
 	
 	@Test
 	public void stringIdEquals() {
 		StringEntity entity1 = new StringEntity();
-		Assert.assertNotEquals(entity1, null);
-		
 		StringEntity entity2 = new StringEntity();
-		Assert.assertNotEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertNotEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isNotEqualTo(entity2.hashCode());
+		assertThat(entity1).isNotEqualTo(entity2);
 		
 		entity1.setId("a");
-		Assert.assertNotEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertNotEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isNotEqualTo(entity2.hashCode());
+		assertThat(entity1).isNotEqualTo(entity2);
 		
 		entity2.setId("b");
-		Assert.assertNotEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertNotEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isNotEqualTo(entity2.hashCode());
+		assertThat(entity1).isNotEqualTo(entity2);
 		
 		entity2.setId(entity1.getId());
-		Assert.assertEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isEqualTo(entity2.hashCode());
+		assertThat(entity1).isEqualTo(entity2);
 		
 		entity1.setId("abc");
 		entity2.setId("abc");
-		Assert.assertEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isEqualTo(entity2.hashCode());
+		assertThat(entity1).isEqualTo(entity2);
 		
 		entity2 = entity1;
-		Assert.assertEquals(entity1.hashCode(), entity2.hashCode());
-		Assert.assertEquals(entity1, entity2);
+		assertThat(entity1.hashCode()).isEqualTo(entity2.hashCode());
+		assertThat(entity1).isEqualTo(entity2);
 	}
 	
 	@Test
@@ -77,11 +75,11 @@ public class BasicEntityTest {
 		LongEntity longEntity = new LongEntity();
 		StringEntity stringEntity = new StringEntity();
 		
-		Assert.assertNotEquals(longEntity, stringEntity);
-		Assert.assertFalse(longEntity.equals(stringEntity));
+		assertThat(longEntity).isNotSameAs(stringEntity);
+		assertThat(longEntity.equals(stringEntity)).isFalse();
 
-		Assert.assertNotEquals(stringEntity, longEntity);
-		Assert.assertFalse(stringEntity.equals(longEntity));
+		assertThat(stringEntity).isNotSameAs(longEntity);
+		assertThat(stringEntity.equals(longEntity)).isFalse();
 	}
 	
 	
